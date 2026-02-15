@@ -1,0 +1,35 @@
+version: 0.2
+
+env:
+  variables:
+    DOCKER_BUILDKIT: "1"
+
+phases:
+  pre_build:
+    commands:
+      - echo "Build started on $(date)"
+      - echo "GitHub SHA - $GITHUB_SHA"
+      - echo "GitHub Ref - $GITHUB_REF"
+      - echo "Repository - $GITHUB_REPOSITORY"
+      
+  build:
+    commands:
+      - echo "Building application..."
+      - echo "Add your build commands here"
+      # Example commands:
+      # - npm install
+      # - npm run build
+      # - docker build -t myapp:$GITHUB_SHA .
+      
+  post_build:
+    commands:
+      - echo "Build completed on $(date)"
+
+artifacts:
+  files:
+    - '**/*'
+
+cache:
+  paths:
+    - '/root/.npm/**/*'
+    - '/root/.cache/**/*'
