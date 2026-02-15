@@ -1,35 +1,24 @@
 version: 0.2
 
-env:
-  variables:
-    DOCKER_BUILDKIT: "1"
+# This buildspec is ignored by default when using CodeBuild as a GitHub Actions runner.
+# CodeBuild automatically sets up the self-hosted runner during the BUILD phase.
+# 
+# To run custom commands in INSTALL, PRE_BUILD, or POST_BUILD phases,
+# add "buildspec-override:true" to your runs-on label in the workflow:
+#
+# runs-on:
+#   - codebuild-github-action-runner-${{ github.run_id }}-${{ github.run_attempt }}
+#     buildspec-override:true
 
 phases:
+  install:
+    commands:
+      - echo "Install phase - runs before GitHub Actions runner starts"
+      
   pre_build:
     commands:
-      - echo "Build started on $(date)"
-      - echo "GitHub SHA - $GITHUB_SHA"
-      - echo "GitHub Ref - $GITHUB_REF"
-      - echo "Repository - $GITHUB_REPOSITORY"
-      
-  build:
-    commands:
-      - echo "Building application..."
-      - echo "Add your build commands here"
-      # Example commands:
-      # - npm install
-      # - npm run build
-      # - docker build -t myapp:$GITHUB_SHA .
+      - echo "Pre-build phase - runs before GitHub Actions runner starts"
       
   post_build:
     commands:
-      - echo "Build completed on $(date)"
-
-artifacts:
-  files:
-    - '**/*'
-
-cache:
-  paths:
-    - '/root/.npm/**/*'
-    - '/root/.cache/**/*'
+      - echo "Post-build phase - runs after GitHub Actions job completes"
