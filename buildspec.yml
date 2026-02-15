@@ -1,28 +1,17 @@
 version: 0.2
 
-# This buildspec is ignored by default when using CodeBuild as a GitHub Actions runner.
-# CodeBuild automatically sets up the self-hosted runner during the BUILD phase.
-# 
-# To run custom commands in INSTALL, PRE_BUILD, or POST_BUILD phases,
-# add "buildspec-override:true" to your runs-on label in the workflow:
-#
-# runs-on:
-#   - codebuild-github-action-runner-${{ github.run_id }}-${{ github.run_attempt }}
-#     buildspec-override:true
+# This buildspec runs when buildspec-override:true is set in the workflow
 
 phases:
   install:
     commands:
       - echo "Install phase - setting up environment"
-      - apt-get update || yum update -y
       
   pre_build:
     commands:
       - echo "Pre-build phase - before GitHub Actions runner starts"
-      - echo "Current directory: $(pwd)"
-      - echo "Available tools: $(which docker git aws)"
+      - echo "Current directory is $(pwd)"
       
   post_build:
     commands:
       - echo "Post-build phase - after GitHub Actions job completes"
-      - echo "Cleanup or deployment tasks can go here"
