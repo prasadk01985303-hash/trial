@@ -13,12 +13,16 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo "Install phase - runs before GitHub Actions runner starts"
+      - echo "Install phase - setting up environment"
+      - apt-get update || yum update -y
       
   pre_build:
     commands:
-      - echo "Pre-build phase - runs before GitHub Actions runner starts"
+      - echo "Pre-build phase - before GitHub Actions runner starts"
+      - echo "Current directory: $(pwd)"
+      - echo "Available tools: $(which docker git aws)"
       
   post_build:
     commands:
-      - echo "Post-build phase - runs after GitHub Actions job completes"
+      - echo "Post-build phase - after GitHub Actions job completes"
+      - echo "Cleanup or deployment tasks can go here"
