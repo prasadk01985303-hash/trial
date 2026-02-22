@@ -7,6 +7,7 @@ clickhouse:
   cloud: aws
   coldStorage:
     enabled: true
+    type: s3
     defaultKeepFreeSpaceBytes: "10485760"
     endpoint: https://signoz-cold-storage-186014908484.s3.ap-south-1.amazonaws.com/data/
     role:
