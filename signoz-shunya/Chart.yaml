@@ -1,0 +1,14 @@
+apiVersion: v2
+name: signoz
+description: SigNoz - Observability platform with traces, metrics, and logs
+type: application
+version: 1.0.0
+appVersion: "0.111.0"
+dependencies:
+  - name: signoz
+    version: 0.111.0
+    repository: https://charts.signoz.io
+  - name: k8s-infra
+    version: 0.15.0
+    repository: https://charts.signoz.io
+    alias: signoz-k8s-infra

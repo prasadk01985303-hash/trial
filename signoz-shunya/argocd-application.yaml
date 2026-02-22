@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: signoz
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: <YOUR_GIT_REPO_URL>
+    targetRevision: HEAD
+    path: signoz-shunya
+    helm:
+      valueFiles:
+        - signoz/custom-values.yaml
+        - k8s-infra-otel-signoz/values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: signoz
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

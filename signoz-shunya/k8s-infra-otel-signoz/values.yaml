@@ -1,0 +1,16 @@
+# K8s Infrastructure Monitoring values
+
+otelCollectorEndpoint: signoz-otel-collector.signoz.svc.cluster.local:4317
+otelInsecure: true
+
+persistence:
+  storageClass: gp3
+
+# Resource limits for dev environment
+resources:
+  limits:
+    cpu: 500m
+    memory: 1Gi
+  requests:
+    cpu: 250m
+    memory: 512Mi

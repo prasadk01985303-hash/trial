@@ -1,0 +1,77 @@
+# Custom values for AWS EKS with S3 cold storage (Dev Environment)
+
+global:
+  storageClass: gp3
+
+clickhouse:
+  cloud: aws
+  coldStorage:
+    enabled: true
+    defaultKeepFreeSpaceBytes: "10485760"
+    endpoint: https://signoz-cold-storage-734910191031.s3.ap-south-1.amazonaws.com/data/
+    role:
+      enabled: true
+      annotations:
+        eks.amazonaws.com/role-arn: arn:aws:iam::734910191031:role/signoz-clickhouse-s3-role
+  persistence:
+    storageClass: gp3
+    size: 50Gi
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 2Gi
+    requests:
+      cpu: 250m
+      memory: 1Gi
+
+postgresql:
+  primary:
+    persistence:
+      storageClass: gp3
+      size: 10Gi
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 256Mi
+
+zookeeper:
+  persistence:
+    storageClass: gp3
+    size: 10Gi
+  resources:
+    limits:
+      cpu: 250m
+      memory: 256Mi
+    requests:
+      cpu: 50m
+      memory: 128Mi
+
+queryService:
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 256Mi
+
+frontend:
+  resources:
+    limits:
+      cpu: 250m
+      memory: 256Mi
+    requests:
+      cpu: 50m
+      memory: 128Mi
+
+alertmanager:
+  resources:
+    limits:
+      cpu: 250m
+      memory: 256Mi
+    requests:
+      cpu: 50m
+      memory: 128Mi
